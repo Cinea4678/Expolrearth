@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/huanyou?autoReconnect=true
+    username: postgres
+    password: rememberus
+
+    hikari:
+      minimum-idle: 3
+      idle-timeout: 40000
+      maximum-pool-size: 10
+      auto-commit: true
+      max-lifetime: 60000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 30MB
+
+app:
+  s3:
+    endpoint: https://s3.oss-cn-shanghai.aliyuncs.com
+    bucket: cinea-webstatic
+    region: auto
+    webPrefix: https://s.c.accr.cc
+    path:
+      image-upload: huanyou/uploaded-img
