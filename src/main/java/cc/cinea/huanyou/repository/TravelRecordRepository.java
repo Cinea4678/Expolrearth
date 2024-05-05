@@ -19,4 +19,11 @@ import java.util.List;
 public interface TravelRecordRepository extends JpaRepository<TravelRecord, Long> {
     @Query("select author as author from TravelRecord where id =:id")
     TravelRecordAuthorProjection findAuthorById(@Param("id") Long id);
+
+    @Query("select case when count(u)>0 then true else false end from TravelRecord r join r.likedUser u where r.id = :recordId and u.id = :userId")
+    boolean isLikedByUser(@Param("recordId") Long recordId, @Param("userId") Long userId);
+
+    Page<TravelRecordPreviewProjection> findAllBy(Pageable pageable);
+
+    List<TravelRecordPreviewProjection> findAllByAuthorOrderByPublishTimeDesc(RegisteredUser author);
 }
