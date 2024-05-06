@@ -47,4 +47,20 @@ public class BanController {
         var result = banService.deleteBan(banId);
         return ApiResp.from(result);
     }
+    
+    @GetMapping
+    @Operation(summary = "获取封禁详情")
+    @ApiResponse(content = @Content(schema = @Schema(implementation = Ban.class)))
+    ApiResp getById(@RequestParam Long banId) {
+        var result = banService.getBanById(banId);
+        return ApiResp.from(result);
+    }
+
+    @GetMapping("/user")
+    @Operation(summary = "查询用户封禁")
+    @ApiResponse(content = @Content(schema = @Schema(implementation = Ban.class)))
+    ApiResp getByUserId(@RequestParam Long userId) {
+        var result = banService.getBanByUserId(userId);
+        return ApiResp.from(result);
+    }
 }

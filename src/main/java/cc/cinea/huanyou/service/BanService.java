@@ -14,4 +14,8 @@ public interface BanService {
     Either<Void, String> editBan(Ban ban);
 
     Either<Void, String> deleteBan(Long banId);
+
+    Either<Ban, String> getBanById(Long banId);
+
+    Either<List<Ban>, String> getBanByUserId(Long userId);
 }

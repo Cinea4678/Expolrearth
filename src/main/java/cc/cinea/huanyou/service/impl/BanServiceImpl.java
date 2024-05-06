@@ -75,4 +75,16 @@ public class BanServiceImpl implements BanService{
         banRepository.delete(ban);
         return Either.left(null);
     }
+
+    @Override
+    public Either<Ban, String> getBanById(Long banId) {
+        var banOptional = banRepository.findById(banId);
+        return banOptional.<Either<Ban, String>>map(Either::left).orElseGet(() -> Either.right("指定的封禁不存在"));
+    }
+
+    @Override
+    public Either<List<Ban>, String> getBanByUserId(Long userId) {
+        var userOptional = registedUserRepository.findById(userId);
+        return userOptional.<Either<List<Ban>, String>>map(registeredUser -> Either.left(registeredUser.getBanList())).orElseGet(() -> Either.right("指定的用户不存在"));
+    }
 }
