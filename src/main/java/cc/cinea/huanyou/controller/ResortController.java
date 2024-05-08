@@ -43,5 +43,13 @@ public class ResortController {
         return ApiResp.from(result);
     }
 
+    @Secured("ROLE_ADMIN")
+    @PutMapping
+    @Operation(summary = "更新景区信息")
+    ApiResp updateInfo(@RequestBody Resort resort) {
+        var result = resortService.updateInfo(resort);
+        return ApiResp.from(result);
+    }
+
 
 }
