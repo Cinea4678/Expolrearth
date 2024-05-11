@@ -47,7 +47,7 @@ public class BanController {
         var result = banService.deleteBan(banId);
         return ApiResp.from(result);
     }
-    
+
     @GetMapping
     @Operation(summary = "获取封禁详情")
     @ApiResponse(content = @Content(schema = @Schema(implementation = Ban.class)))
