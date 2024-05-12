@@ -19,4 +19,16 @@ public interface TravelRecordService {
     TravelRecord getInfoById(Long recordId);
 
     TravelRecord getInfoWithInteractionById(Long recordId, Long userId);
+
+    boolean update(TravelRecord travelRecord, Long operatorId);
+
+    Either<Void, String> like(Long recordId, Long operatorId);
+
+    Either<Void, String> editFavorites(Long recordId, Long favoritesId, Long operatorId, boolean isAdd);
+
+    Either<Void, String> cancelLike(Long recordId, Long operatorId);
+
+    Page<TravelRecordPreviewProjection> getTravelRecords(Pageable pageable, boolean isPreview);
+
+    List<TravelRecordPreviewProjection> getTravelRecordsByAuthorId(Long authorId);
 }
