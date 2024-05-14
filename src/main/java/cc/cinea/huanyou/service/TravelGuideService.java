@@ -20,4 +20,18 @@ public interface TravelGuideService {
     TravelGuide getInfoById(Long guideId);
 
     TravelGuide getInfoWithInteractionById(Long recordId, Long userId);
+
+    boolean update(TravelGuide travelGuide, Long operatorId);
+
+    Either<Void, String> like(Long guideId, Long operatorId);
+
+    Either<Void, String> editFavorites(Long guideId, Long favoritesId, Long operatorId, boolean isAdd);
+
+    Either<Void, String> cancelLike(Long guideId, Long operatorId);
+
+    Page<TravelGuidePreviewProjection> getTravelGuides(Pageable pageable, boolean isPreview);
+
+    Page<TravelGuidePreviewProjection> getTravelGuidesByResortId(Long resortId, Pageable pageable);
+
+    List<TravelGuidePreviewProjection> getTravelGuidesByAuthorId(Long authorId);
 }
