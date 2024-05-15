@@ -15,4 +15,8 @@ public interface CommentService {
     Either<Void, String> removeComment(Long commentId, Long operatorId);
 
     Either<Void, String> addReply(Comment comment, Long authorId, Long replyTo);
+
+    Either<Void, String> like(Long commentId, Long operatorId);
+
+    Either<Void, String> cancelLike(Long commentId, Long operatorId);
 }

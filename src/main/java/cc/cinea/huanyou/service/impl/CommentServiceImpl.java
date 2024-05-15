@@ -143,4 +143,45 @@ public class CommentServiceImpl implements CommentService {
 
         return Either.left(null);
     }
+
+    @Override
+    public Either<Void, String> like(Long commentId, Long operatorId) {
+        var commentOptional = commentRepository.findById(commentId);
+        if (commentOptional.isEmpty()) {
+            return Either.right("评论不存在");
+        }
+
+        var comment = commentOptional.get();
+        if (commentRepository.isLikedByUser(commentId, operatorId)) {
+            return Either.right("您已经为评论点过赞了");
+        }
+
+        var user = new RegisteredUser();
+        user.setId(operatorId);
+        comment.getLikedUser().add(user);
+        comment.setLikes(comment.getLikes() + 1);
+
+        commentRepository.save(comment);
+        return Either.left(null);
+    }
+
+    @Override
+    public Either<Void, String> cancelLike(Long commentId, Long operatorId) {
+        var commentOptional = commentRepository.findById(commentId);
+        if (commentOptional.isEmpty()) {
+            return Either.right("评论不存在");
+        }
+
+        var comment = commentOptional.get();
+        if (!commentRepository.isLikedByUser(commentId, operatorId)) {
+            return Either.right("您还没有为评论点过赞");
+        }
+
+        var user = registedUserRepository.findById(operatorId).orElse(null);
+        comment.getLikedUser().remove(user);
+        comment.setLikes(comment.getLikes() + 1);
+
+        commentRepository.save(comment);
+        return Either.left(null);
+    }
 }

@@ -60,4 +60,22 @@ public class CommentController {
         var result = commentService.addReply(comment, userId, to);
         return ApiResp.from(result);
     }
+
+    @Secured("ROLE_USER")
+    @PostMapping("/like")
+    @Operation(summary = "点赞")
+    ApiResp like(@RequestParam Long id, Principal principal) {
+        var userId = Long.parseLong(principal.getName());
+        var result = commentService.like(id, userId);
+        return ApiResp.from(result);
+    }
+
+    @Secured("ROLE_USER")
+    @PostMapping("/cancel-like")
+    @Operation(summary = "取消点赞")
+    ApiResp cancelLike(@RequestParam Long id, Principal principal) {
+        var userId = Long.parseLong(principal.getName());
+        var result = commentService.cancelLike(id, userId);
+        return ApiResp.from(result);
+    }
 }
