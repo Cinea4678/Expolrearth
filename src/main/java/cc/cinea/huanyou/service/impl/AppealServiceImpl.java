@@ -59,4 +59,19 @@ public class AppealServiceImpl implements AppealService {
         return Either.left(null);
     }
 
+    @Override
+    public Either<Void, String> withdrawAppeal(Long appealId, Long operatorId) {
+        var appealOptional = appealRepository.findById(appealId);
+        if (appealOptional.isEmpty()) {
+            return Either.right("未找到该申诉");
+        }
+        var appeal = appealOptional.get();
+
+        if (!appeal.getBan().getUserId().equals(operatorId)) {
+            return Either.right("您不可撤回该申诉");
+        }
+
+        appealRepository.deleteById(appealId);
+        return Either.left(null);
+    }
 }

@@ -44,6 +44,13 @@ public class AppealController {
         return ApiResp.from(result);
     }
 
+    @Secured("ROLE_USER")
+    @DeleteMapping
+    @Operation(summary = "撤回申诉")
+    ApiResp withdrawAppeal(@RequestParam Long appealId, Principal principal) {
+        var userId = Long.parseLong(principal.getName());
+        var result = appealService.withdrawAppeal(appealId, userId);
+        return ApiResp.from(result);
+    }
 
-    
 }
