@@ -110,5 +110,10 @@ public class ResortServiceImpl implements ResortService {
     public Page<Resort> getResorts(Pageable pageable) {
         return resortRepository.findAll(pageable);
     }
+
+    @Override
+    public List<Resort> searchByName(String name) {
+        return resortRepository.findAllByNameLike(String.format("%%%s%%", name));
+    }
     
 }
