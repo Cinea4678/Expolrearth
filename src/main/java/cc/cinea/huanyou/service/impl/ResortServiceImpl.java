@@ -105,5 +105,10 @@ public class ResortServiceImpl implements ResortService {
     public Either<Resort, String> getInfoById(Long resortId) {
         return resortRepository.findById(resortId).map(Either::<Resort, String>left).orElse(Either.right("景区不存在"));
     }
+
+    @Override
+    public Page<Resort> getResorts(Pageable pageable) {
+        return resortRepository.findAll(pageable);
+    }
     
 }

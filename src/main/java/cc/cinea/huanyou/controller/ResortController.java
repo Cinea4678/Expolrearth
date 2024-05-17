@@ -77,5 +77,12 @@ public class ResortController {
         return ApiResp.from(result);
     }
 
+    @GetMapping("/recommend")
+    @Operation(summary = "获取推荐景区")
+    ApiResp getRecommendResorts(Pageable pageable) {
+        var result = resortService.getResorts(pageable);
+        return ApiResp.success(result);
+    }
+
 
 }

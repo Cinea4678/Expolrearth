@@ -22,4 +22,6 @@ public interface ResortService {
     Either<Void, String> cancelLike(Long resortId, Long operatorId);
 
     Either<Resort, String> getInfoById(Long resortId);
+
+    Page<Resort> getResorts(Pageable pageable);
 }
