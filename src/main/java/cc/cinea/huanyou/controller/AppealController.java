@@ -36,5 +36,14 @@ public class AppealController {
         return ApiResp.from(result);
     }
 
+    @Secured("ROLE_ADMIN")
+    @PutMapping
+    @Operation(summary = "修改申诉状态")
+    ApiResp setAppealState(@RequestParam Long appealId, @RequestParam AppealState state) {
+        var result = appealService.setAppealState(appealId, state);
+        return ApiResp.from(result);
+    }
+
+
     
 }

@@ -45,5 +45,18 @@ public class AppealServiceImpl implements AppealService {
         return Either.left(null);
     }
 
-   
+    @Override
+    public Either<Void, String> setAppealState(Long appealId, AppealState newState) {
+        var appealOptional = appealRepository.findById(appealId);
+        if (appealOptional.isEmpty()) {
+            return Either.right("未找到该申诉");
+        }
+        var appeal = appealOptional.get();
+
+        appeal.setState(newState);
+        appealRepository.save(appeal);
+
+        return Either.left(null);
+    }
+
 }
