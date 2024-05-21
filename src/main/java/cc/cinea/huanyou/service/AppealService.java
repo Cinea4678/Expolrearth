@@ -15,4 +15,9 @@ public interface AppealService {
     Either<Void, String> setAppealState(Long appealId, AppealState newState);
 
     Either<Void, String> withdrawAppeal(Long appealId, Long operatorId);
+
+    Either<Appeal, String> getAppealById(Long appealId);
+
+
+
 }

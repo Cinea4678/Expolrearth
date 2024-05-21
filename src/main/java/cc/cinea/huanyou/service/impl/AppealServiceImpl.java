@@ -74,4 +74,20 @@ public class AppealServiceImpl implements AppealService {
         appealRepository.deleteById(appealId);
         return Either.left(null);
     }
+
+    @Override
+    public Either<Appeal, String> getAppealById(Long appealId) {
+        var appealOptional = appealRepository.findById(appealId);
+        return appealOptional.<Either<Appeal, String>>map(Either::left).orElseGet(() -> Either.right("未找到该申诉"));
+    }
+
+
+
+
+
+
+
+
+
+
 }
