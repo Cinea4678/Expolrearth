@@ -62,7 +62,14 @@ public class AppealController {
         return ApiResp.from(result);
     }
 
+    @Secured("ROLE_USER")
+    @GetMapping("/user")
+    @Operation(summary = "获取某用户的所有申诉")
+    @ApiResponse(content = @Content(schema = @Schema(implementation = Appeal.class)))
+    ApiResp getByUserId(@RequestParam Long userId) {
+        var result = appealService.getAppealByUserId(userId);
+        return ApiResp.from(result);
+    }
 
 
-    
 }

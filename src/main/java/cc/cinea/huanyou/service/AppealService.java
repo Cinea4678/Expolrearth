@@ -18,6 +18,6 @@ public interface AppealService {
 
     Either<Appeal, String> getAppealById(Long appealId);
 
-
+    Either<List<Appeal>, String> getAppealByUserId(Long userId);
 
 }

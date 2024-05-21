@@ -81,7 +81,10 @@ public class AppealServiceImpl implements AppealService {
         return appealOptional.<Either<Appeal, String>>map(Either::left).orElseGet(() -> Either.right("未找到该申诉"));
     }
 
-
+    @Override
+    public Either<List<Appeal>, String> getAppealByUserId(Long userId) {
+        return Either.left(appealRepository.findAllOfUserId(userId));
+    }
 
 
 
