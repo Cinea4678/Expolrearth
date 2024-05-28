@@ -71,5 +71,12 @@ public class AppealController {
         return ApiResp.from(result);
     }
 
-
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/all")
+    @Operation(summary = "获取所有申诉")
+    @ApiResponse(content = @Content(schema = @Schema(implementation = Appeal.class)))
+    ApiResp getAll() {
+        var result = appealService.getAllAppeals();
+        return ApiResp.from(result);
+    }
 }

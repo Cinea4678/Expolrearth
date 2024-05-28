@@ -86,11 +86,18 @@ public class AppealServiceImpl implements AppealService {
         return Either.left(appealRepository.findAllOfUserId(userId));
     }
 
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/all")
+    @Operation(summary = "获取所有申诉")
+    @ApiResponse(content = @Content(schema = @Schema(implementation = Appeal.class)))
+    ApiResp getAll() {
+        var result = appealService.getAppeals();
+        return ApiResp.from(result);
+    }
 
-
-
-
-
-
+    @Override
+    public Either<List<Appeal>, String> getAllAppeals() {
+        return Either.left(appealRepository.findAll());
+    }
 
 }

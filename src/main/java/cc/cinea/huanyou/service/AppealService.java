@@ -20,4 +20,5 @@ public interface AppealService {
 
     Either<List<Appeal>, String> getAppealByUserId(Long userId);
 
+    Either<List<Appeal>, String> getAllAppeals();
 }
