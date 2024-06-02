@@ -40,5 +40,24 @@ public class ResortServiceImpl implements ResortService {
         resortRepository.deleteById(resortId);
         return Either.left(null);
     }
+
+    @Override
+    public Either<Void, String> updateInfo(Resort resort) {
+        var oldResortOptional = resortRepository.findById(resort.getId());
+        if (oldResortOptional.isEmpty()) {
+            return Either.right("景区不存在");
+        }
+
+        var oldResort = oldResortOptional.get();
+        oldResort.setAddress(resort.getAddress());
+        oldResort.setName(resort.getName());
+        oldResort.setImageList(resort.getImageList());
+        oldResort.setDescription(resort.getDescription());
+        oldResort.setSummary(resort.getSummary());
+
+        resortRepository.save(oldResort);
+
+        return Either.left(null);
+    }
     
 }

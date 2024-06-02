@@ -14,5 +14,6 @@ public interface ResortService {
     Either<Void, String> add(Resort resort);
 
     Either<Void, String> delete(Long resortId);
-    
+
+    Either<Void, String> updateInfo(Resort resort);
 }
