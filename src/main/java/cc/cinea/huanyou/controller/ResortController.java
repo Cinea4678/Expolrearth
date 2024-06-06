@@ -51,5 +51,23 @@ public class ResortController {
         return ApiResp.from(result);
     }
 
+    @Secured("ROLE_USER")
+    @PostMapping("/like")
+    @Operation(summary = "点赞")
+    ApiResp like(@RequestParam Long id, Principal principal) {
+        var userId = Long.parseLong(principal.getName());
+        var result = resortService.like(id, userId);
+        return ApiResp.from(result);
+    }
+
+    @Secured("ROLE_USER")
+    @PostMapping("/cancel-like")
+    @Operation(summary = "取消点赞")
+    ApiResp cancelLike(@RequestParam Long id, Principal principal) {
+        var userId = Long.parseLong(principal.getName());
+        var result = resortService.cancelLike(id, userId);
+        return ApiResp.from(result);
+    }
+
 
 }

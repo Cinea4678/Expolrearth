@@ -59,5 +59,46 @@ public class ResortServiceImpl implements ResortService {
 
         return Either.left(null);
     }
+
+    @Override
+    public Either<Void, String> like(Long resortId, Long operatorId) {
+        var resortOptional = resortRepository.findById(resortId);
+        if (resortOptional.isEmpty()) {
+            return Either.right("景点不存在");
+        }
+
+        var resort = resortOptional.get();
+        if (resortRepository.isLikedByUser(resortId, operatorId)) {
+            return Either.right("您已经为景区点过赞了");
+        }
+
+        var user = new RegisteredUser();
+        user.setId(operatorId);
+        resort.getLikedUser().add(user);
+        resort.setLikes(resort.getLikes() + 1);
+
+        resortRepository.save(resort);
+        return Either.left(null);
+    }
+
+    @Override
+    public Either<Void, String> cancelLike(Long resortId, Long operatorId) {
+        var resortOptional = resortRepository.findById(resortId);
+        if (resortOptional.isEmpty()) {
+            return Either.right("景点不存在");
+        }
+
+        var resort = resortOptional.get();
+        if (!resortRepository.isLikedByUser(resortId, operatorId)) {
+            return Either.right("您没有为这个景区点过赞");
+        }
+
+        var user = registedUserRepository.findById(operatorId).orElse(null);
+        resort.getLikedUser().remove(user);
+        resort.setLikes(resort.getLikes() - 1);
+
+        resortRepository.save(resort);
+        return Either.left(null);
+    }
     
 }

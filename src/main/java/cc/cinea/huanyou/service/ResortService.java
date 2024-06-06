@@ -16,4 +16,8 @@ public interface ResortService {
     Either<Void, String> delete(Long resortId);
 
     Either<Void, String> updateInfo(Resort resort);
+
+    Either<Void, String> like(Long resortId, Long operatorId);
+
+    Either<Void, String> cancelLike(Long resortId, Long operatorId);
 }
