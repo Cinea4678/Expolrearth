@@ -69,5 +69,13 @@ public class ResortController {
         return ApiResp.from(result);
     }
 
+    @GetMapping
+    @Operation(summary = "获取景区详情")
+    @ApiResponse(content = @Content(schema = @Schema(implementation = Resort.class)))
+    ApiResp getInfoById(@RequestParam Long id) {
+        var result = resortService.getInfoById(id);
+        return ApiResp.from(result);
+    }
+
 
 }

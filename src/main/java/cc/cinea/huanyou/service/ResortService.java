@@ -20,4 +20,6 @@ public interface ResortService {
     Either<Void, String> like(Long resortId, Long operatorId);
 
     Either<Void, String> cancelLike(Long resortId, Long operatorId);
+
+    Either<Resort, String> getInfoById(Long resortId);
 }

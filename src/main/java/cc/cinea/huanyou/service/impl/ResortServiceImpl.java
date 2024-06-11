@@ -100,5 +100,10 @@ public class ResortServiceImpl implements ResortService {
         resortRepository.save(resort);
         return Either.left(null);
     }
+
+    @Override
+    public Either<Resort, String> getInfoById(Long resortId) {
+        return resortRepository.findById(resortId).map(Either::<Resort, String>left).orElse(Either.right("景区不存在"));
+    }
     
 }
