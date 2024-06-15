@@ -12,5 +12,7 @@ import java.util.List;
 public interface AppealService {
     Either<Void, String> submitAppeal(Appeal appeal, Long operatorId);
 
+    Either<Void, String> setAppealState(Long appealId, AppealState newState);
+
     
 }
