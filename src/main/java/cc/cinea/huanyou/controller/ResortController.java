@@ -84,5 +84,12 @@ public class ResortController {
         return ApiResp.success(result);
     }
 
+    @GetMapping("/search")
+    @Operation(summary = "搜索景区")
+    ApiResp getRecommendResorts(@RequestParam String name) {
+        var result = resortService.searchByName(name);
+        return ApiResp.success(result);
+    }
+
 
 }

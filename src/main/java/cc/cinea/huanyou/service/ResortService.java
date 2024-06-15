@@ -24,4 +24,6 @@ public interface ResortService {
     Either<Resort, String> getInfoById(Long resortId);
 
     Page<Resort> getResorts(Pageable pageable);
+
+    List<Resort> searchByName(String name);
 }
